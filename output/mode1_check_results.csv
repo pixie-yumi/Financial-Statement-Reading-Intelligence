@@ -1,0 +1,75 @@
+company,version,statement,items_found,both_years,status
+Abbott Labs Pakistan.pdf,unknown,balance_sheet,32,29,OK
+Abbott Labs Pakistan.pdf,unknown,cash_flow,43,41,OK
+Abbott Labs Pakistan.pdf,unknown,profit_and_loss,14,13,OK
+Attock Cement.pdf,unknown,balance_sheet,29,26,OK
+Attock Cement.pdf,unknown,cash_flow,26,21,OK
+Attock Cement.pdf,unknown,profit_and_loss,20,17,OK
+Engro Annual 2025.pdf,consolidated,balance_sheet,34,32,OK
+Engro Annual 2025.pdf,consolidated,cash_flow,25,22,OK
+Engro Annual 2025.pdf,consolidated,profit_and_loss,17,17,OK
+Fauji Fertilizers.pdf,consolidated,balance_sheet,36,36,OK
+Fauji Fertilizers.pdf,consolidated,cash_flow,24,21,OK
+Fauji Fertilizers.pdf,consolidated,profit_and_loss,18,16,OK
+Gul Ahmed Annual 2025.pdf,consolidated,balance_sheet,51,50,OK
+Gul Ahmed Annual 2025.pdf,consolidated,cash_flow,47,44,OK
+Gul Ahmed Annual 2025.pdf,consolidated,profit_and_loss,51,50,OK
+Gul Ahmed Annual 2025.pdf,unconsolidated,balance_sheet,47,46,OK
+Gul Ahmed Annual 2025.pdf,unconsolidated,cash_flow,43,39,OK
+Gul Ahmed Annual 2025.pdf,unconsolidated,profit_and_loss,47,46,OK
+Indus Motor.pdf,unknown,balance_sheet,30,29,OK
+Indus Motor.pdf,unknown,cash_flow,25,24,OK
+Indus Motor.pdf,unknown,profit_and_loss,16,16,OK
+JS BankLtd.pdf,consolidated,balance_sheet,25,23,OK
+JS BankLtd.pdf,consolidated,cash_flow,46,42,OK
+JS BankLtd.pdf,consolidated,profit_and_loss,35,33,OK
+JS BankLtd.pdf,unconsolidated,balance_sheet,23,23,OK
+JS BankLtd.pdf,unconsolidated,cash_flow,42,40,OK
+JS BankLtd.pdf,unconsolidated,profit_and_loss,28,27,OK
+K-electric LImited.pdf,consolidated,balance_sheet,40,36,OK
+K-electric LImited.pdf,consolidated,cash_flow,48,42,OK
+K-electric LImited.pdf,consolidated,profit_and_loss,26,25,OK
+K-electric LImited.pdf,unconsolidated,balance_sheet,40,37,OK
+K-electric LImited.pdf,unconsolidated,cash_flow,49,43,OK
+K-electric LImited.pdf,unconsolidated,profit_and_loss,25,25,OK
+Lucky Cement Limited.pdf,consolidated,balance_sheet,35,35,OK
+Lucky Cement Limited.pdf,consolidated,cash_flow,29,22,OK
+Lucky Cement Limited.pdf,consolidated,profit_and_loss,30,29,OK
+Lucky Cement Limited.pdf,unconsolidated,balance_sheet,27,27,OK
+Lucky Cement Limited.pdf,unconsolidated,cash_flow,25,23,OK
+Lucky Cement Limited.pdf,unconsolidated,profit_and_loss,17,17,OK
+MCB Limited.pdf,consolidated,balance_sheet,23,23,OK
+MCB Limited.pdf,consolidated,cash_flow,47,45,OK
+MCB Limited.pdf,consolidated,profit_and_loss,37,36,OK
+MCB Limited.pdf,unconsolidated,balance_sheet,22,22,OK
+MCB Limited.pdf,unconsolidated,cash_flow,49,44,OK
+MCB Limited.pdf,unconsolidated,profit_and_loss,29,29,OK
+Mughal Iron and Steel.pdf,consolidated,balance_sheet,32,31,OK
+Mughal Iron and Steel.pdf,consolidated,cash_flow,29,23,OK
+Mughal Iron and Steel.pdf,consolidated,profit_and_loss,28,27,OK
+NETSOL ANNUAL 2025.pdf,consolidated,balance_sheet,26,24,OK
+NETSOL ANNUAL 2025.pdf,consolidated,cash_flow,40,34,OK
+NETSOL ANNUAL 2025.pdf,consolidated,profit_and_loss,15,15,OK
+NETSOL ANNUAL 2025.pdf,unconsolidated,balance_sheet,27,25,OK
+NETSOL ANNUAL 2025.pdf,unconsolidated,cash_flow,40,34,OK
+NETSOL ANNUAL 2025.pdf,unconsolidated,profit_and_loss,15,15,OK
+Nishat.pdf,consolidated,balance_sheet,35,35,OK
+Nishat.pdf,consolidated,cash_flow,29,27,OK
+Nishat.pdf,consolidated,profit_and_loss,29,28,OK
+Quice Foods.pdf,unknown,balance_sheet,16,16,OK
+Quice Foods.pdf,unknown,cash_flow,25,19,OK
+Quice Foods.pdf,unknown,profit_and_loss,14,13,OK
+SYS.pdf,consolidated,balance_sheet,40,37,OK
+SYS.pdf,consolidated,cash_flow,28,25,OK
+SYS.pdf,consolidated,profit_and_loss,30,28,OK
+SYS.pdf,unconsolidated,balance_sheet,31,28,OK
+SYS.pdf,unconsolidated,cash_flow,56,56,OK
+SYS.pdf,unconsolidated,profit_and_loss,17,17,OK
+Sapphire Textiles Limited.pdf,consolidated,balance_sheet,37,35,OK
+Sapphire Textiles Limited.pdf,consolidated,cash_flow,30,28,OK
+Sapphire Textiles Limited.pdf,consolidated,profit_and_loss,34,33,OK
+TPL Tracker ltd.pdf,consolidated,balance_sheet,30,27,OK
+TPL Tracker ltd.pdf,consolidated,profit_and_loss,24,22,OK
+TPL Tracker ltd.pdf,unconsolidated,balance_sheet,28,28,OK
+TPL Tracker ltd.pdf,unconsolidated,cash_flow,65,60,OK
+TPL Tracker ltd.pdf,unconsolidated,profit_and_loss,17,15,OK
