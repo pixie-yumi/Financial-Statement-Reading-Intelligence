@@ -32,9 +32,6 @@ try:
 except Exception:
     ranges_df = pd.DataFrame(columns=["filename", "version", "type"])
 
-# ---------------------------------------------------------------
-# STATE
-# ---------------------------------------------------------------
 if "company" not in st.session_state:
     st.session_state.company = None
 if "version" not in st.session_state:
@@ -44,7 +41,6 @@ if "stype" not in st.session_state:
 
 
 def reset_from(step):
-    """Clears this step and everything after it."""
     if step in ("company", "all"):
         st.session_state.company = None
         st.session_state.version = None
@@ -56,7 +52,6 @@ def reset_from(step):
         st.session_state.stype = None
 
 
-# Breadcrumb / reset trail
 crumb_parts = []
 if st.session_state.company:
     crumb_parts.append(st.session_state.company.replace(".pdf", ""))
@@ -76,9 +71,6 @@ if crumb_parts:
 
 st.divider()
 
-# ---------------------------------------------------------------
-# STEP 1: COMPANY
-# ---------------------------------------------------------------
 if not st.session_state.company:
     st.subheader("Pick a company")
     companies = sorted(results_df["filename"].unique())
@@ -91,9 +83,6 @@ if not st.session_state.company:
                 st.session_state.company = company
                 st.rerun()
 
-# ---------------------------------------------------------------
-# STEP 2: VERSION
-# ---------------------------------------------------------------
 elif not st.session_state.version:
     company = st.session_state.company
     company_ranges = ranges_df[ranges_df["filename"].str.contains(
@@ -113,9 +102,6 @@ elif not st.session_state.version:
                     st.session_state.version = v
                     st.rerun()
 
-# ---------------------------------------------------------------
-# STEP 3: STATEMENT TYPE
-# ---------------------------------------------------------------
 elif not st.session_state.stype:
     company = st.session_state.company
     version = st.session_state.version
@@ -146,9 +132,6 @@ elif not st.session_state.stype:
                     st.session_state.stype = t
                     st.rerun()
 
-# ---------------------------------------------------------------
-# STEP 4: ASK FOR A LINE ITEM
-# ---------------------------------------------------------------
 else:
     company = st.session_state.company
     version = st.session_state.version
@@ -158,10 +141,15 @@ else:
     line_item = st.text_input("e.g. revenue, trade receivables, total assets", key="line_item_input")
 
     if st.button("Get value") and line_item.strip():
-        result = query(company.replace(".pdf", ""), "2025", line_item, results_df, version=version if version != "unknown" else None)
-        # try 2025 first, fall back to showing whichever year has data
+        result = query(
+            company.replace(".pdf", ""), "2025", line_item, results_df,
+            version=version if version != "unknown" else None, stype=stype
+        )
         if not result["found"]:
-            result = query(company.replace(".pdf", ""), "2024", line_item, results_df, version=version if version != "unknown" else None)
+            result = query(
+                company.replace(".pdf", ""), "2024", line_item, results_df,
+                version=version if version != "unknown" else None, stype=stype
+            )
 
         if result["found"]:
             st.success(f"**{result['raw_label']}**  ({result['category']})")
@@ -169,7 +157,8 @@ else:
 
             row_match = results_df[
                 (results_df["filename"] == result["company"]) &
-                (results_df["category"] == result["category"])
+                (results_df["category"] == result["category"]) &
+                (results_df["statement_type"] == result["statement_type"])
             ]
             if not row_match.empty:
                 row = row_match.iloc[0]

@@ -13,15 +13,6 @@ import re
 import sys
 import pandas as pd
 
-# FIX: on Windows, Python's stdout defaults to the console's configured
-# codepage (often cp1252 or similar), NOT UTF-8. Some labels extracted
-# from PDFs contain non-ASCII characters (e.g. a Unicode dash variant
-# instead of a plain ASCII "-"). When such bytes get encoded to the
-# wrong codepage and rendered by certain Windows terminals, they can be
-# misinterpreted as control characters (cursor movement), causing
-# earlier text on the same line to be visually overwritten -- even
-# though the underlying string is completely correct. Forcing UTF-8
-# here fixes this at the source.
 if hasattr(sys.stdout, "reconfigure"):
     try:
         sys.stdout.reconfigure(encoding="utf-8")
@@ -47,17 +38,6 @@ STATEMENT_TYPES = ["balance_sheet", "profit_and_loss", "cash_flow"]
 
 
 def list_raw_line_items(filename, stype, version, ranges_path=RANGES_PATH):
-    """NEW: lists EVERY genuine line item from a company's statement,
-    exactly as worded in the PDF -- WITHOUT requiring it to match one
-    of our known SYNONYMS categories first.
-
-    Why: the categorized query (mode 1) only shows an item if it
-    matched one of our ~100 predefined categories. Any real line item
-    using wording we haven't added a synonym for simply doesn't show
-    up at all -- silently. This function instead pulls the ACTUAL
-    table for the right pages and lists every row that survives basic
-    junk-filtering (prose/footer/garbled text), so it works for ANY
-    company's exact wording, not just the ones we've already covered."""
     try:
         ranges_df = pd.read_csv(ranges_path)
     except Exception as e:
@@ -189,7 +169,7 @@ def ask_line_item(filename, results_df, version=None):
     return choice
 
 
-def query(company, year, line_item, results_df, threshold=60, version=None):
+def query(company, year, line_item, results_df, threshold=60, version=None, stype=None):
     try:
         year_col = "value_2025" if str(year) == "2025" else "value_2024"
         company_matches = results_df[results_df["filename"].str.contains(company, case=False, na=False)]
@@ -212,6 +192,23 @@ def query(company, year, line_item, results_df, threshold=60, version=None):
                         "message": f"No {version} data found for '{company}' at all "
                                    f"(only the other version may be available).",
                     }
+
+        # NEW: restrict to a specific statement type if one was given --
+        # prevents a line item from one statement (e.g. total_assets in
+        # balance_sheet) from silently being returned while the person is
+        # browsing a DIFFERENT statement (e.g. cash_flow). Previously the
+        # dashboard's statement-type selection wasn't enforced here at
+        # all, so "total assets" typed while viewing Cash Flow would
+        # still incorrectly match the balance_sheet row for that company.
+        if stype:
+            stype_matches = company_matches[company_matches["statement_type"] == stype]
+            if stype_matches.empty:
+                version_note = f" in the {searched_version} version" if searched_version else ""
+                return {
+                    "found": False,
+                    "message": f"'{line_item}' isn't part of the {stype.replace('_', ' ')} for '{company}'{version_note}.",
+                }
+            company_matches = stype_matches
 
         exact_matches = company_matches[
             company_matches["category"].astype(str).str.lower() == line_item.lower()
@@ -408,9 +405,6 @@ def process_new_pdf(pdf_path):
 
 
 def show_raw_statement(company, stype, version):
-    """Shows EVERY genuine line item actually present in the PDF for
-    this statement + version -- exactly as worded in the PDF, with its
-    real value."""
     if stype == "changes_in_equity":
         print(
             "\n  Note: Statement of Changes in Equity has a different table "
@@ -450,10 +444,6 @@ def show_raw_statement(company, stype, version):
 
 
 def pick_version(company, ranges_path=RANGES_PATH):
-    """Asks Consolidated/Unconsolidated -- but if this company's PDF
-    doesn't actually distinguish the two at all, skip the question
-    entirely and use that single version instead of forcing a choice
-    that doesn't apply."""
     try:
         ranges_df = pd.read_csv(ranges_path)
     except Exception:
@@ -471,8 +461,6 @@ def pick_version(company, ranges_path=RANGES_PATH):
 
 
 def pick_statement_type(company, version, ranges_path=RANGES_PATH):
-    """Shows which statement types actually exist for this company +
-    version, and lets the person pick one."""
     try:
         ranges_df = pd.read_csv(ranges_path)
     except Exception:
