@@ -1,6 +1,8 @@
 # Financial Statement Reading Intelligence
 
-A 4-stage pipeline for extracting structured financial data from Pakistani company annual reports, built during a Data Engineering internship at SBP.
+**[Live Demo](https://financial-statement-reading-intelligence-v7fqcifx3rxwqzhkbsch8.streamlit.app/)** — click through a company's financials or ask questions in natural language.
+
+A 4-stage pipeline for extracting structured financial data from Pakistani company annual reports, built during an internship at SBP.
 
 ## Current Status
 
